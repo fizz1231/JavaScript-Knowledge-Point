@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let str = `
+    js 300rmb 100,
+    ts 500.00rmb 500,
+    dart 120.0rmb 100
+    `;
+    let reg = /(\d+)(.00|.0)?(?=rmb)/g;
+    console.log(str.match(reg));
+    let res = str.replace(reg, "$1.00");
+    console.log(res);
+    //断言
+    // ?=111 后面是
+    // ?<=111 前面是
+    // ?!111 后面不是
+    // ?<!111 前面不是
+  </script>
+</html>

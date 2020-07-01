@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let dbName = "my_db";
+    var request = indexedDB.open(dbName, 2);
+    request.onerror = function (e) {
+      throw new Error(e);
+    };
+    request.onupgradeneeded = function (event) {
+      var db = event.target.result;
+      var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+      objectStore.createIndex("name", "name", { unique: false });
+      objectStore.createIndex("email", "email", { unique: true });
+      objectStore.transaction.oncomplete = function (e) {
+        var customersObjectStore = db
+          .transaction("customers", "readwrite")
+          .objectStore("customers");
+        // customerData.forEach(function (customer) {
+        //   customersObjectStore.add(customer);
+        // });
+      };
+    };
+  </script>
+</html>
